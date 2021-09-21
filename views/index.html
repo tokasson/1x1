@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <meta name="description" content="Lenas 1x1 Learner" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>
+        {{title}}
+      </h1>
+    </header>
+
+    <!--<section class="add-new-post">
+      <h2>Section 1</h2>      
+      <p>
+        <a href="/delete">Delete All Posts</a>
+        <a href="/testGet">testGet</a>
+        <a href="/testSet">testSet</a>
+      </p>
+    </section>
+    
+    <hr />-->
+    <pre>session: {{session | dump | safe}}</pre>
+    {% if (session.solutionChecked) and (session.lastCorrect) %}
+    <section class="lastOneCorrect">
+        Glückwunsch! Deine Lösung war korrekt! Versuche es noch einmal. :)
+    </section>
+        {% set session = session|setAttribute('solutionChecked', false) %}
+        {% set session = session|setAttribute('lastCorrect', false) %}
+    {% endif %}
+
+    <section class="task">
+        <h2>Aufgabe</h2><br>
+        <form method="post" action="/checkSolution">
+            {{factorOne}} x {{factorTwo}} = <input id="solutionInput" name="solutionInput">
+            &nbsp;<button id="checkSolution" type="submit">Lösung überprüfen</button>
+            &nbsp;<button id="nextTask" type="button">Nächste Aufgabe</button>
+        </form>
+    </section>
+    
+    <section class="masteredTasks">
+
+    </section>
+
+    <script>
+        const button = document.getElementById('nextTask');
+        button.addEventListener('click', () => {
+            window.location.reload();
+        });
+    </script>
+  </body>
+</html>
